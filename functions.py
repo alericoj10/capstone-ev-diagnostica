@@ -1,3 +1,4 @@
+from audioop import reverse
 import re
 import pandas as pd
 
@@ -15,4 +16,19 @@ def most_active_days(tweets):
     return tweets['date_day'].value_counts().head(10)
 
 def most_frecuent_hashtags(tweets):
-    pass
+    tweets['hastags'] = tweets['content'].apply(lambda x: [tag.strip("#") for tag in x.split() if tag.startswith("#")])
+    hashtags_frecuency = {}
+    for tags in tweets['hastags']:
+        for tag in tags:
+            if tag in hashtags_frecuency:
+                hashtags_frecuency[tag] += 1
+            else:
+                hashtags_frecuency[tag] = 1
+    hashtags_frecuency = {k: v for k, v in sorted(hashtags_frecuency.items(), key=lambda item: item[1], reverse=True)}
+    top_10_dict = {}
+    n = 1
+    while n < 10:
+        for k, v in hashtags_frecuency.items():
+            top_10_dict[k] = v
+            n += 1
+    return top_10_dict
