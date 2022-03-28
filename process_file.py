@@ -22,4 +22,4 @@ def tweets():
     return tweets
 
 def get_raw_tweets():
-    return pd.read_json('data-test.json', lines=True)
+    return pd.read_json('farmers-protest-tweets.json', lines=True)

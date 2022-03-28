@@ -26,9 +26,10 @@ def most_frecuent_hashtags(tweets):
                 hashtags_frecuency[tag] = 1
     hashtags_frecuency = {k: v for k, v in sorted(hashtags_frecuency.items(), key=lambda item: item[1], reverse=True)}
     top_10_dict = {}
-    n = 1
-    while n < 10:
-        for k, v in hashtags_frecuency.items():
-            top_10_dict[k] = v
-            n += 1
+    n = 0
+    for k, v in hashtags_frecuency.items():
+        if n >= 10:
+            break
+        top_10_dict[k] = v
+        n += 1
     return top_10_dict
