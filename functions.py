@@ -2,12 +2,13 @@ import re
 import pandas as pd
 
 def most_retweeted(tweets):
-    tweets = tweets.sort_values(by="retweetCount", ascending=False).head(10)
-    return tweets[['content', 'retweetCount']]
+    top_tweets = tweets.sort_values(by="retweetCount", ascending=False).head(10)
+    return top_tweets[['content', 'retweetCount']]
 
 def most_active_users(tweets, users):
-    tweets.groupby(['userId']).size()
-    return
+    user_ids = tweets['userId'].value_counts().head(10)
+    top_users = users.loc[users['userId'].isin(user_ids.index.array)]
+    return top_users[['username', 'displayname', 'userId']]
 
 def most_active_days(tweets):
     pass
