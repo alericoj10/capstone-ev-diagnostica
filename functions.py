@@ -11,7 +11,8 @@ def most_active_users(tweets, users):
     return top_users[['username', 'displayname', 'userId']]
 
 def most_active_days(tweets):
-    pass
+    tweets['date_day'] = tweets['date'].apply(lambda x: str(x).split(' ')[0])
+    return tweets['date_day'].value_counts().head(10)
 
 def most_frecuent_hashtags(tweets):
     pass
